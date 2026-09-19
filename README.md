@@ -1,145 +1,114 @@
-# Lab5_673380585-0_Sec3
+# Custom ViewResolver Demo
 
-# Coffee Menu Service REST API
+โปรเจกต์ตัวอย่างการใช้งาน **Custom ViewResolver** ใน Spring Boot ร่วมกับ Thymeleaf สำหรับแสดงผลหน้าเว็บโดยใช้ Logical View Name แทนการระบุ path ของไฟล์โดยตรง
 
-Mini Project รายวิชา **CP353002 – Principles of Software Design and Development**
+## ผู้จัดทำ
 
-## Technology
-- Java 17
-- Spring Boot 4.1.0
+- ชื่อ: ธนดล ไชยศิลา
+- รหัสนักศึกษา: 673380585-0
+
+## เทคโนโลยีที่ใช้
+
+- Java
+- Spring Boot
+- Spring MVC
+- Thymeleaf
 - Maven
-- REST API
 
----
+## โครงสร้างโปรเจกต์
 
-## วิธีรันโปรเจกต์
+```
+src
+├── main
+│   ├── java
+│   │   └── com.example.demo
+│   │       ├── DemoApplication.java
+│   │       ├── config
+│   │       │   └── ThymeleafConfig.java
+│   │       └── controller
+│   │           └── HomeController.java
+│   └── resources
+│       ├── application.properties
+│       └── my-templates
+│           ├── home.html
+│           └── about.html
+```
+
+## การทำงาน
+
+1. Browser ส่ง Request ไปยัง Spring Boot
+2. DispatcherServlet รับ Request
+3. Controller ประมวลผลและส่งกลับชื่อ View เช่น `home`
+4. ViewResolver แปลงชื่อ View เป็นไฟล์ HTML
+5. Thymeleaf แสดงผลและส่ง HTML กลับไปยัง Browser
+
+## URL
+
+| URL | รายละเอียด |
+|-----|-------------|
+| `/` | หน้าแรก แสดงชื่อและรหัสนักศึกษา |
+| `/about` | หน้าแนะนำตัว |
+
+## การรันโปรเจกต์
 
 1. Clone โปรเจกต์
 
 ```bash
 git clone <repository-url>
-cd <project-folder>
 ```
 
-2. รันโปรเจกต์
+2. เข้าโฟลเดอร์โปรเจกต์
+
+```bash
+cd demo
+```
+
+3. รันโปรแกรม
 
 ```bash
 mvn spring-boot:run
 ```
 
-เมื่อรันสำเร็จ เซิร์ฟเวอร์จะทำงานที่
+4. เปิดเว็บ
 
 ```
-http://localhost:8080
+http://localhost:9090/
 ```
 
----
+หรือ
 
-## API Endpoints (ใน Postman)
-
-### 1. ดูเมนูกาแฟทั้งหมด
-
-```http
-GET /coffees
+```
+http://localhost:9090/about
 ```
 
-ตัวอย่าง
+## คุณสมบัติ
 
-```bash
-GET http://localhost:8080/coffees
+- ใช้ Custom Thymeleaf ViewResolver
+- แยก Controller และ View ตามหลัก MVC
+- รองรับหลายหน้า (Home และ About)
+- สามารถเปลี่ยนตำแหน่ง Template ได้จาก `ThymeleafConfig`
+
+## ตัวอย่างผลลัพธ์
+
+หน้าแรก
+
+```
+สวัสดี ธนดล ไชยศิลา (673380585-0)
 ```
 
----
+หน้า About
 
-### 2. ดูเมนูกาแฟตาม ID
+```
+About Me
 
-```http
-GET /coffees/{id}
+ชื่อ : ธนดล ไชยศิลา
+รหัสนักศึกษา : 673380585-0
+กำลังศึกษาสาขาวิทยาการคอมพิวเตอร์
+มหาวิทยาลัยขอนแก่น
 ```
 
-ตัวอย่าง
+## ผู้พัฒนา
 
-```bash
-GET http://localhost:8080/coffees/1
-```
-
----
-
-### 3. เพิ่มเมนูกาแฟ
-
-```http
-POST /coffees
-```
-
-ตัวอย่าง
-
-```bash
-POST http://localhost:8080/coffees
-```
-```bash
-BODY
-{
-    "name":"Cappuccino",
-    "price":60.0
-}
-```
----
-
-### 4. แก้ไขเมนูกาแฟ
-
-```http
-PUT /coffees/{id}
-```
-
-ตัวอย่าง
-
-```bash
-PUT http://localhost:8080/coffees/2
-```
-```bash
-BODY
-{
-    "name":"Latte",
-    "price":50
-}
-```
-
----
-
-### 5. ลบเมนูกาแฟ
-
-```http
-DELETE /coffees/{id}
-```
-
-ตัวอย่าง
-
-```bash
-http://localhost:8080/coffees/3
-```
-
----
-
-## ตัวอย่างข้อมูลเริ่มต้น
-
-เมื่อเริ่มรันระบบ จะมีข้อมูลเริ่มต้นดังนี้
-
-| ID | Name | Price |
-|----|------|------:|
-| 1 | Espresso | 45.0 |
-| 2 | Latte | 55.0 |
-
----
-
-### ค้นหาเมนูตามชื่อ (Bonus)
-
-```http
-GET /coffees/search?name=Latte
-```
-
-ตัวอย่าง
-
-```bash
-curl "http://localhost:8080/coffees/search?name=Latte"
-```
-
+ธนดล ไชยศิลา  
+สาขาวิทยาการคอมพิวเตอร์  
+วิทยาลัยการคอมพิวเตอร์ มหาวิทยาลัยขอนแก่น
