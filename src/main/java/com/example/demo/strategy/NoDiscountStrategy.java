@@ -1,10 +1,8 @@
-package com.example.lab7_673380585_0_sec3.strategy;
+package com.example.demo.strategy;
 
 public class NoDiscountStrategy implements DiscountStrategy {
-
     @Override
-    public double calculatePrice(double price) {
+    public Double calculatePrice(Double price) {
         return price;
     }
-
 }

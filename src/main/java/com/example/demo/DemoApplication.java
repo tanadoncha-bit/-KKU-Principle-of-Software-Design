@@ -1,13 +1,13 @@
-package com.example.lab7_673380585_0_sec3;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Lab7Application {
+public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Lab7Application.class, args);
+		SpringApplication.run(DemoApplication.class, args);
 	}
 
 }

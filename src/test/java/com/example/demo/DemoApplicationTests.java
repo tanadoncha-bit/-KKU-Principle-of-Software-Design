@@ -1,10 +1,10 @@
-package com.example.lab7_673380585_0_sec3;
+package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Lab76733805850Sec3ApplicationTests {
+class DemoApplicationTests {
 
 	@Test
 	void contextLoads() {
