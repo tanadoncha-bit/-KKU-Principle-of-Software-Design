@@ -22,18 +22,18 @@ Repository นี้ใช้สำหรับรวบรวมงาน Lab �
 
 ## Labs
 
-| Lab        | Topic                                          | Branch  |
-| ---------- | ---------------------------------------------- | ------- |
-| **Lab 1**  | Git & GitHub / GitHub Desktop                  | `Lab1`  |
-| **Lab 2**  | Apache Maven Project Management                | `Lab2`  |
-| **Lab 3**  | Java Shipment Exercise                         | `Lab3`  |
-| **Lab 4**  | Spring Boot REST API                           | `Lab4`  |
-| **Lab 5**  | My First REST API — Coffee Menu Service        | `Lab5`  |
-| **Lab 6**  | Custom ViewResolver in Spring Boot + Thymeleaf | `Lab6`  |
-| **Lab 7**  | Database Connectivity — Game Catalog CRUD      | `Lab7`  |
-| **Lab 8**  | Spring Boot — Product Shop / JPA               | `Lab8`  |
-| **Lab 9**  | Spring Boot — Transaction                      | `Lab9`  |
-| **Lab 10** | Spring WebFlux & WebClient                     | `Lab10` |
+| **Lab**                                                                                     | **Topic**                                      | **Branch** |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------- |
+| [**Lab 1**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab1)   | Git & GitHub / GitHub Desktop                  | `Lab1`     |
+| [**Lab 2**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab2)   | Apache Maven Project Management                | `Lab2`     |
+| [**Lab 3**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab3)   | Java Shipment Exercise                         | `Lab3`     |
+| [**Lab 4**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab4)   | Spring Boot REST API                           | `Lab4`     |
+| [**Lab 5**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab5)   | My First REST API — Coffee Menu Service        | `Lab5`     |
+| [**Lab 6**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab6)   | Custom ViewResolver in Spring Boot + Thymeleaf | `Lab6`     |
+| [**Lab 7**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab7)   | Database Connectivity — Game Catalog CRUD      | `Lab7`     |
+| [**Lab 8**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab8)   | Spring Boot — Product Shop / JPA               | `Lab8`     |
+| [**Lab 9**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab9)   | Spring Boot — Transaction                      | `Lab9`     |
+| [**Lab 10**](https://github.com/tanadoncha-bit/KKU_Principle_of_Software_Design/tree/Lab10) | Spring WebFlux & WebClient                     | `Lab10`    |
 
 ---
 
