@@ -1,275 +1,337 @@
-# java-shipment-exercise
-
-แบบฝึกหัด Java OOP — ระบบคำนวณค่าขนส่ง Shipment  
-วิชา Object-Oriented Programming | ปีการศึกษา 2569
+# 🌱 Lab04 — Spring Boot REST API
 
 ---
 
-##  คำอธิบายโจทย์
+## 📋 วิธี Fork โปรเจกต์นี้
 
-บริษัทขนส่งแห่งหนึ่งมีรายการ **Shipment** หลายรายการ  
-ให้เขียนโปรแกรม Java คำนวณค่าขนส่งตามน้ำหนักและประเภท แล้วแสดงยอดรวม
-
-**กฎการคำนวณ:**
-
-| ประเภท | อัตรา |
-|--------|-------|
-| STANDARD (มาตรฐาน) | 40 บาท / กิโลกรัม |
-| EXPRESS (ด่วน) | 100 บาท / กิโลกรัม |
-
----
-
-## 📁 ไฟล์ในโปรเจกต์
-
-```
-java-shipment-exercise/
-├── pom.xml                              ← Maven config (JUnit 5)
-├── src/
-│   ├── main/java/com/example/
-│   │   ├── ShipmentSection1_Exercise.java
-│   │   ├── ShipmentSection2_Exercise.java
-│   │   ├── ShipmentSection3_Exercise.java
-│   │   └── ShipmentSection4_Exercise.java
-│   └── test/java/com/example/
-│       └── ShipmentTest.java            ← JUnit 5 test cases
-├── ExpectedOutput_Section1.md  ...  Section4.md
-├── screenshots/                         ← ใส่รูปผลลัพธ์ตรงนี้
-└── README.md
-```
-
-> เฉลยไม่ได้อยู่ใน repo นี้ — อาจารย์จะแจกให้หลังส่งงาน
-
----
-
-## 🔧 เครื่องมือที่ใช้ในงานนี้
-
-| เครื่องมือ | ใช้ทำอะไร |
-|-----------|----------|
-| **Eclipse หรือ VS Code** | เปิดไฟล์ แก้ Bug ตาม TODO รันโปรแกรมดูผลลัพธ์ |
-| **CMD / Terminal** | รัน `mvn test` เพื่อทดสอบด้วย JUnit |
-
----
-
-## 🍴 วิธีเริ่มต้น (Fork & Clone)
-
-### Step 1 — Fork repo นี้
-
-กดปุ่ม **Fork** มุมบนขวาของหน้านี้
-
-> Fork แล้ว repo จะไปอยู่ใน GitHub ของตัวเอง
-
-**ตั้งชื่อ repo ให้ถูกต้อง:**
-- รูปแบบ: `lab03_67XXXXX` (แทน XXXXX ด้วยรหัสนักศึกษาแบบไม่มีหรือมีก็ได้)
-- ตัวอย่าง: `lab03_6712345`
-
-> ถ้าลืมตั้งชื่อตอน Fork → ไปแก้ที่ **Settings → Repository name → Rename**
-
-link repo ที่ส่งให้อาจารย์จะเป็น:
-`https://github.com/your-username/lab03_67XXXXX`
-
----
-
-### Step 2 — Clone ลงเครื่อง
+1. กดปุ่ม **Fork** มุมบนขวาของหน้า GitHub นี้
+2. เลือก account ของคุณ → กด **Create fork**
+3. **เปลี่ยนชื่อ repo** ให้เป็น `67XXXXXXXX-X`  
+   โดย `67XXXXXXXX` = รหัสนักศึกษา 10 หลัก, `X` = Section  
+   ตัวอย่าง: `6701234567-1`
+4. Clone repo ที่ fork มาลงเครื่อง:
 
 ```bash
-git clone https://github.com/your-username/java-shipment-exercise.git
+git clone https://github.com/<your-username>/67XXXXXXXX-X.git
+cd 67XXXXXXXX-X
+```
+
+5. แก้ไขข้อมูลส่วนตัวตาม [ขั้นตอนที่ 4](#-ขั้นตอนที่-4--แก้ไขข้อมูลส่วนตัว) ด้านล่าง
+
+---
+
+##  Prerequisites (สิ่งที่ต้องมีก่อน)
+
+| รายการ | เวอร์ชันที่รองรับ | ตรวจสอบ |
+|--------|------------------|---------|
+| Java JDK | 17 หรือ 21 | `java -version` |
+| Apache Maven | 3.9.x ขึ้นไป | `mvn -v` |
+| Git | ใดก็ได้ | `git --version` |
+
+> ⚠️ **ถ้ายังไม่มี JDK** → ดาวน์โหลดได้ที่ https://adoptium.net  
+> ⚠️ **ถ้ายังไม่มี Maven** → ดาวน์โหลดได้ที่ https://maven.apache.org/download.cgi
+
+---
+
+## 🌐 วิธีสร้างโปรเจกต์ Spring Boot ใหม่ (ถ้าไม่ Fork)
+
+> Spring Boot **ไม่มีการติดตั้งแยก** — สร้างผ่าน IDE หรือ Spring Initializr แล้ว Maven จะดึง dependency มาให้อัตโนมัติ
+
+---
+
+## 🟣 Eclipse — ติดตั้ง Spring Tools และสร้าง Spring Boot Project
+
+> **Spring Tools 4 (ST4)** คือ plugin ล่าสุดสำหรับ Eclipse  
+> เวอร์ชันปัจจุบัน: **4.32.x** (Spring Tools 3 หยุดพัฒนาแล้ว อย่าลงผิด)
+
+### ขั้นตอนที่ 1 — ติดตั้ง Spring Tools 4 ผ่าน Eclipse Marketplace
+
+1. เปิด Eclipse → **Help → Eclipse Marketplace**
+2. ช่อง Search พิมพ์ `Spring Tools` → กด Enter
+3. เลือก **Spring Tools 4 (aka Spring Tool Suite 4)** → กด **Install**
+4. ติ๊กถูก features ที่ต้องการ → กด **Confirm**
+5. ยอมรับ License → กด **Finish**
+6. รอติดตั้ง → Eclipse จะขอ Restart → กด **Restart Now**
+
+> ⚠️ ถ้าหา Marketplace ไม่เจอ ให้ไปที่  
+> **Help → Install New Software** → วาง URL นี้:  
+> `https://cdn.spring.io/spring-tools/release/update/latest/`  
+> แล้วกด Add → ติ๊กเลือก features → กด Next จนเสร็จ
+
+---
+
+### ขั้นตอนที่ 2 — สร้าง Spring Boot Project ใน Eclipse
+
+**1. สร้างโปรเจกต์ใหม่**
+- File → New → Other
+- พิมพ์ `Spring` → เลือก **Spring Starter Project** → Next
+
+**2. กรอกข้อมูลโปรเจกต์**
+- Name: `67XXXXXXXX-X`
+- Type: `Maven`
+- Packaging: `Jar`
+- Java Version: `17`
+- Group: `com.example`
+- Artifact: `67XXXXXXXX-X`
+- กด Next
+
+**3. เพิ่ม Dependencies**
+- ช่อง Search พิมพ์ `Spring Web` → ติ๊ก ✓
+- พิมพ์ `DevTools` → ติ๊ก **Spring Boot DevTools** ✓
+- กด Finish
+
+**4. รอ Eclipse ดาวน์โหลด Dependencies**
+- ดูแถบ progress ล่างขวา รอจนหาย (ประมาณ 1-3 นาที)
+- โปรเจกต์ปรากฏใน Package Explorer
+
+**5. รันโปรเจกต์**
+- คลิกขวาที่โปรเจกต์ → Run As → **Spring Boot App**
+- Console แสดง `Tomcat started on port 8080` = พร้อมใช้งาน ✅
+
+---
+
+## 🔵 VS Code — สร้าง Spring Boot Project
+
+> ต้องติดตั้ง Extension ก่อน:
+> - **Extension Pack for Java**
+> - **Spring Boot Extension Pack**
+
+**1. เปิด Command Palette**
+- กด `Ctrl+Shift+P` (Windows) หรือ `Cmd+Shift+P` (Mac)
+
+**2. สร้างโปรเจกต์**
+- พิมพ์ `Spring Initializr: Create a Maven Project`
+- กด Enter
+
+**3. เลือกค่าทีละขั้น** (VS Code จะถามทีละอย่าง)
+- Spring Boot version → เลือก `3.3.x`
+- Language → `Java`
+- Group Id → `com.example`
+- Artifact Id → `67XXXXXXXX-X`
+- Packaging → `Jar`
+- Java version → `17`
+
+**4. เพิ่ม Dependencies**
+- พิมพ์ `Spring Web` → กด Space เพื่อติ๊ก ✓
+- พิมพ์ `DevTools` → กด Space เพื่อติ๊ก **Spring Boot DevTools** ✓
+- กด Enter เพื่อยืนยัน
+
+**5. เลือก folder ที่จะเซฟโปรเจกต์**
+- เลือก folder → กด **Generate into this folder**
+- VS Code จะถามให้ Open folder → กด **Open**
+
+**6. รันโปรเจกต์**
+```bash
+# เปิด Terminal (Ctrl+`)
+mvn spring-boot:run
+```
+- Terminal แสดง `Tomcat started on port 8080` = พร้อมใช้งาน ✅
+
+---
+
+## 🗂️ โครงสร้างโปรเจกต์
+
+```
+67XXXXXXXX-X/
+├── pom.xml                                         ← config หลักของ Maven/Spring Boot
+├── .gitignore
+├── README.md
+└── src/
+    ├── main/
+    │   ├── java/com/example/lab03/
+    │   │   ├── Lab03Application.java               ← จุดเริ่มต้นแอป (main)
+    │   │   └── controller/
+    │   │       └── HelloController.java            ← REST Controller ← แก้ตรงนี้
+    │   └── resources/
+    │       └── application.properties             ← ตั้งค่า port, logging
+    └── test/
+        └── java/com/example/lab03/
+            └── Lab03ApplicationTests.java          ← unit test
 ```
 
 ---
 
-### Step 3 — เปิดโปรเจกต์ใน Eclipse หรือ VS Code
+## 🚀 ขั้นตอนที่ 1 — ติดตั้ง JDK
 
----
+### Windows
+1. ไปที่ https://adoptium.net
+2. เลือก **JDK 17** (LTS) → กด **Download**
+3. รันไฟล์ `.msi` ที่ดาวน์โหลดมา → กด **Next** จนเสร็จ
+4. ตรวจสอบ:
 
-#### 🟦 ใช้ VS Code
+```powershell
+java -version
+# ควรขึ้น: openjdk version "17.x.x" ...
+```
 
-1. ติดตั้ง Extension: **Extension Pack for Java** (Microsoft) — ถ้ายังไม่มี
-2. **File → Open Folder** → เลือกโฟลเดอร์ที่ Clone มา
-3. VS Code อ่าน `pom.xml` แล้วโหลด JUnit 5 ให้อัตโนมัติ
-4. เปิด Terminal ใน VS Code (**Terminal → New Terminal**)
-5. รัน test ได้เลย:
+5. ตั้งค่า `JAVA_HOME`:
+   - เปิด **System Properties** → **Environment Variables**
+   - กด **New** ใต้ User variables
+   - `Variable name`: `JAVA_HOME`
+   - `Variable value`: `C:\Program Files\Eclipse Adoptium\jdk-17.x.x.x-hotspot`
+   - กด OK → เปิด PowerShell ใหม่แล้วรัน `java -version` อีกครั้ง
 
+### macOS
 ```bash
-mvn -Dtest=ShipmentTest_SectionX test
+brew install openjdk@17
+
+export JAVA_HOME=$(/usr/libexec/java_home -v17)
+export PATH="$JAVA_HOME/bin:$PATH"
+
+source ~/.zshrc
+java -version
 ```
 
 ---
 
-#### 🟧 ใช้ Eclipse
+## 🔧 ขั้นตอนที่ 2 — ติดตั้ง Apache Maven
 
-> ⚠️ ห้าม **File → New → Java Project** — ต้อง **Import** เท่านั้น
+### Windows
+1. ดาวน์โหลด Binary zip archive จาก https://maven.apache.org/download.cgi
+2. แตกไฟล์ไปไว้ที่ `C:\Program Files\Apache\maven\apache-maven-3.9.x`
+3. ตั้งค่า Environment Variables:
+   - `MAVEN_HOME` = `C:\Program Files\Apache\maven\apache-maven-3.9.x`
+   - เพิ่ม `%MAVEN_HOME%\bin` ใน **Path**
+4. เปิด PowerShell ใหม่แล้วตรวจสอบ:
 
-1. เปิด Eclipse → **File → Import**
-2. เลือก **Maven → Existing Maven Projects** → กด **Next**
-3. กด **Browse** → เลือกโฟลเดอร์ที่ Clone มา
-4. กด **Finish**
-5. Eclipse อ่าน `pom.xml` แล้วโหลด JUnit 5 ให้อัตโนมัติ
-6. เปิด CMD แล้วรัน test:
-
-```bash
-cd path/ที่เก็บโปรเจกต์
-mvn -Dtest=ShipmentTest_SectionX test
+```powershell
+mvn -v
+# ควรขึ้น: Apache Maven 3.9.x ...
 ```
 
-> ต้องมี Java 17+ ในเครื่องก่อน ดาวน์โหลดได้ที่ https://adoptium.net
+### macOS / Linux
+```bash
+# macOS
+brew install maven
+
+# Ubuntu / Debian
+sudo apt update && sudo apt install maven -y
+
+mvn -v
+```
 
 ---
 
-
-### Step 3.5 — ⚠️ ลบไฟล์ Section อื่นออก
-
-หลัง Fork แล้วให้ลบไฟล์ของ Section อื่นออกทั้งหมด ทั้ง Exercise และ Test file
-
-**ตัวอย่าง: ถ้าได้รับมอบหมาย Section 2**
+## 📦 ขั้นตอนที่ 3 — Clone และเปิดโปรเจกต์
 
 ```bash
-# ลบ Exercise file
-git rm src/main/java/com/example/ShipmentSection1_Exercise.java
-git rm src/main/java/com/example/ShipmentSection3_Exercise.java
-git rm src/main/java/com/example/ShipmentSection4_Exercise.java
+# 1. Clone repo (ใช้ URL ของ fork คุณเอง)
+git clone https://github.com/<your-username>/67XXXXXXXX-X.git
 
-# ลบ Test file
-git rm src/test/java/com/example/ShipmentTest_Section1.java
-git rm src/test/java/com/example/ShipmentTest_Section3.java
-git rm src/test/java/com/example/ShipmentTest_Section4.java
+# 2. เข้า folder
+cd 67XXXXXXXX-X
 
-git commit -m "remove: ลบไฟล์ Section อื่นออก เหลือแค่ Section ของตัวเอง"
+# 3. ดาวน์โหลด dependencies (ครั้งแรกอาจใช้เวลา 2-5 นาที)
+mvn dependency:resolve
+```
+
+---
+
+## ✏️ ขั้นตอนที่ 4 — แก้ไขข้อมูลส่วนตัว
+
+เปิดไฟล์ `src/main/java/com/example/lab03/controller/HelloController.java`
+
+แก้ไข 3 บรรทัดนี้:
+
+```java
+private static final String NAME    = "Your Name Here";  // ← ใส่ชื่อ-สกุลจริง
+private static final String ID      = "xxxx";            // ← ใส่รหัสนักศึกษา
+private static final String SECTION = "x";               // ← ใส่เลข Section
+```
+
+**ตัวอย่างหลังแก้แล้ว:**
+
+```java
+private static final String NAME    = "สมชาย ใจดี";
+private static final String ID      = "6701234567";
+private static final String SECTION = "1";
+```
+
+---
+
+## ▶️ ขั้นตอนที่ 5 — Build และรันโปรเจกต์
+
+### ผ่าน Command Line
+
+```bash
+mvn clean package
+mvn spring-boot:run
+```
+
+> ✅ **สัญญาณว่ารันสำเร็จ:**
+> ```
+> Started Lab03Application in 2.345 seconds (JVM running for 2.8)
+> Tomcat started on port 8080
+> ```
+
+### ผ่าน Eclipse
+1. คลิกขวาที่โปรเจกต์ → **Run As** → **Spring Boot App**
+2. ดูผลใน Console tab
+
+### ผ่าน VS Code
+```bash
+# เปิด Terminal ใน VS Code (Ctrl+`)
+mvn spring-boot:run
+```
+
+---
+
+## 🌐 ขั้นตอนที่ 6 — ทดสอบ API
+
+| URL | ผลลัพธ์ที่คาดหวัง |
+|-----|------------------|
+| http://localhost:8080/api/hello | `Hello! My name is ..., Student ID: ..., sec: ...` |
+| http://localhost:8080/api/info | `Project: Lab03 Spring Boot \| Name: ... \| ID: ...` |
+| http://localhost:8080/api/status | `Server is running OK` |
+
+```bash
+# หรือทดสอบผ่าน Terminal
+curl http://localhost:8080/api/hello
+```
+
+---
+
+## 🛑 ขั้นตอนที่ 7 — หยุดแอปพลิเคชัน
+
+```bash
+^C   # Ctrl + C
+```
+
+---
+
+## 🔄 ขั้นตอนที่ 8 — Commit และ Push ขึ้น GitHub
+
+```bash
+git status
+git add .
+git commit -m "feat: update student info - ID 67XXXXXXXX sec X"
 git push origin main
 ```
 
-**โครงสร้างที่ถูกต้องหลังลบ (ตัวอย่าง Section 2):**
-```
-src/
-├── main/java/com/example/
-│   └── ShipmentSection2_Exercise.java   ← เหลือแค่ของตัวเอง
-└── test/java/com/example/
-    └── ShipmentTest_Section2.java        ← เหลือแค่ของตัวเอง
-```
+> ⚠️ **GitHub มี 2 แบบที่ต้องระวัง:**
+> - **Login บนเว็บ github.com** → ใช้ password ปกติได้
+> - **git push / git pull ผ่าน Terminal** → ใช้ password ไม่ได้ ต้องใช้ **Personal Access Token** แทน
+>
+> วิธีสร้าง Token: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → ติ๊ก `repo` → Copy token แล้วใช้แทน password
 
 ---
 
-### Step 4 — แก้ Bug ใน Eclipse
+## 🐛 Troubleshooting
 
-เปิดไฟล์ Exercise ของ Section ตัวเองใน Eclipse แล้วแก้ตามลำดับ TODO ในไฟล์
-
-| Section | บริษัท | Bug หลักที่ซ่อนไว้ |
-|:-------:|--------|-------------------|
-| 1 | SpeedEx Logistics | enum ขาด, parameter สลับ, อัตราสลับ |
-| 2 | FlashMove Express | enum ขาด, assignment สลับ, อัตราผิด |
-| 3 | RocketShip Thailand | if-condition สลับ, index ผิด |
-| 4 | SwiftCargo Co., Ltd. | return ค่าผิด, loop condition ผิด |
-
----
-
-### Step 5 — รันโปรแกรมดูผลลัพธ์ (Eclipse หรือ VS Code)
-
-**ใช้ Eclipse:**
-1. คลิกขวาที่ไฟล์ `ShipmentSectionX_Exercise.java`
-2. เลือก **Run As → Java Application**
-3. ดูผลลัพธ์ใน **Console** ด้านล่าง
-
-**ใช้ VS Code:**
-1. เปิดไฟล์ `ShipmentSectionX_Exercise.java`
-2. กดปุ่ม **▷ Run** มุมบนขวา หรือคลิกขวา → **Run Java**
-3. ดูผลลัพธ์ใน **Terminal** ด้านล่าง
-
-เปรียบเทียบกับ `ExpectedOutput_SectionX.md` ว่าตรงกันมั้ย
+| ปัญหา | สาเหตุ | วิธีแก้ |
+|-------|--------|---------|
+| `JAVA_HOME is not defined` | ยังไม่ตั้งค่า JAVA_HOME | ดู [ขั้นตอนที่ 1](#-ขั้นตอนที่-1--ติดตั้ง-jdk) |
+| `mvn: command not found` | Maven ไม่อยู่ใน PATH | ดู [ขั้นตอนที่ 2](#-ขั้นตอนที่-2--ติดตั้ง-apache-maven) |
+| Port 8080 already in use | มีแอปอื่นใช้ port อยู่ | แก้ `server.port=9090` ใน `application.properties` |
+| `BUILD FAILURE` ตอน compile | Java syntax error | ดูบรรทัดที่ขึ้น `ERROR` ใน console |
+| กด Push แล้วขอ login | GitHub ต้องการ token | ใช้ Personal Access Token แทน password |
 
 ---
 
-### Step 6 — รัน mvn test ใน CMD
+## 📁 สิ่งที่ต้องส่ง
 
-เมื่อผลลัพธ์โปรแกรมตรงแล้ว ให้เปิด CMD แล้วเข้าไปที่โฟลเดอร์โปรเจกต์:
-
-```bash
-cd path/ที่เก็บโปรเจกต์
-# ตัวอย่าง Windows: cd C:\Users\YourName\java-shipment-exercise
-```
-
-รัน test ของ Section ตัวเอง:
-
-```bash
-# Section 1
-mvn -Dtest=ShipmentTest#sec1* test
-
-# Section 2
-mvn -Dtest=ShipmentTest#sec2* test
-
-# Section 3
-mvn -Dtest=ShipmentTest#sec3* test
-
-# Section 4
-mvn -Dtest=ShipmentTest#sec4* test
-```
-
-ผลลัพธ์ที่ต้องการ:
-
-```
-[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
-[INFO] BUILD SUCCESS
-```
-
-> ⚠️ ถ้าขึ้น `BUILD FAILURE` — กลับไปแก้ Bug ใน Eclipse ต่อ
-
----
-
-### Step 7 — ถ่ายภาพและแนบใน screenshots/
-
-สร้างโฟลเดอร์ `screenshots/` แล้วแนบรูป **2 ภาพ**:
-
-```bash
-mkdir screenshots
-```
-
-| ไฟล์รูป | ต้องเห็นอะไรในภาพ |
-|---------|-----------------|
-| `screenshots/mvn_test_result.png` | ผลลัพธ์ `mvn test` — ต้องเห็น `BUILD SUCCESS` และ `Failures: 0` |
-| `screenshots/program_output.png` | ผลลัพธ์ใน Eclipse Console — ต้องเห็นรายการและยอดรวมครบ |
-
-```bash
-git add screenshots/
-git commit -m "screenshot: แนบผลลัพธ์ mvn test และ program output"
-git push origin main
-```
-
----
-
-### Step 8 — Push และส่งงาน
-
-```bash
-git add src/main/java/com/example/ShipmentSectionX_Exercise.java
-git commit -m "fix: แก้ไข TODO Section X เสร็จสมบูรณ์"
-git push origin main
-```
-
-**ส่ง link repo ให้อาจารย์:**  
-`https://github.com/your-username/java-shipment-exercise`
-
----
-
-## ❗ Error ที่พบบ่อย
-
-| Error | สาเหตุ | ดู TODO |
-|-------|--------|--------|
-| `error: cannot find symbol` | enum ไม่ครบ | A (Sec 1, 2) |
-| `NullPointerException` | ลืม `new ArrayList<>()` | E (Sec 1, 2) |
-| ทุกรายการได้ `0.00` | `return 0` แทน `return cost` | A (Sec 4) |
-| ตัวเลขสลับ STANDARD/EXPRESS | if-condition ผิด | A (Sec 3) |
-| ยอดรวมผิด (น้อยกว่าที่ควร) | loop วนไม่ครบ | C (Sec 3, 4) |
-| ไม่มีบรรทัดรายการใดแสดง | `printSummary()` ไม่มี loop | G/D |
-| `BUILD FAILURE` ใน mvn | มี test ไม่ผ่าน — อ่าน expected/actual | แก้ Bug ต่อ |
-
----
-
-## ✅ Checklist ก่อนส่ง
-
-- [ ] Fork และ Clone repo แล้ว
-- [ ] Import โปรเจกต์ใน Eclipse หรือ VS Code แล้ว
-- [ ] แก้ TODO ครบทุกจุดใน Eclipse
-- [ ] รันใน Eclipse หรือ VS Code — ผลลัพธ์ตรงกับ ExpectedOutput
-- [ ] รัน `mvn test` ใน CMD — ขึ้น `BUILD SUCCESS`
-- [ ] `Failures: 0, Errors: 0`
-- [ ] แนบรูป `screenshots/mvn_test_result.png` แล้ว
-- [ ] แนบรูป `screenshots/program_output.png` แล้ว
-- [ ] `git push` ขึ้น GitHub แล้ว
-- [ ] ส่ง link repo ให้อาจารย์แล้ว
+- [ ] Fork repo นี้ และตั้งชื่อ repo เป็น `67XXXXXXXX-X`
+- [ ] Push โค้ดพร้อมข้อมูลของตัวเองขึ้น GitHub
+- [ ] แสดง commit history อย่างน้อย 2 commits
+- [ ] Screenshot Browser ที่เรียก `/api/hello` และ `/api/info`
+- [ ] ส่งไฟล์ PDF ชื่อ `Lab03_xxxxSec#.pdf`
